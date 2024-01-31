@@ -8,4 +8,4 @@ vim.api.nvim_set_hl(0, "Normal", { ctermbg=None, bg=None })
 vim.api.nvim_set_hl(0, "LineNr", { ctermbg=None, bg=None })
 vim.api.nvim_set_hl(0, "SignColumn", { ctermbg=None, bg=None })
 
-vim.g.airline_theme="base16_gruvbox_dark_hard"
+vim.g.airline_theme="base16_classic"
