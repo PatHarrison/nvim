@@ -16,7 +16,7 @@ require("lazy").setup({
 	{'vim-airline/vim-airline'},
 	{'vim-airline/vim-airline-themes'},
 
-	{'nvim-treesitter/nvim-treesitter'},
+	{'nvim-treesitter/nvim-treesitter', tag = 'v0.9.1'},
 
     {
       "xero/miasma.nvim",
