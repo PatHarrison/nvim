@@ -11,7 +11,10 @@ require("lazy").setup({
 	dependencies = { 'nvim-lua/plenary.nvim' }
 	},
 
+    {'preservim/nerdtree'},
+
 	{'tpope/vim-fugitive'},
+    {'tpope/vim-rhubarb'},
 
 	{'vim-airline/vim-airline'},
 	{'vim-airline/vim-airline-themes'},
