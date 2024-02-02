@@ -8,5 +8,6 @@
   "vim-airline": { "branch": "master", "commit": "ff7352e4bff02eb600a136b6fd741404f3195371" },
   "vim-airline-themes": { "branch": "master", "commit": "a9aa25ce323b2dd04a52706f4d1b044f4feb7617" },
   "vim-fugitive": { "branch": "master", "commit": "f116dcc8e21021e6fbfb6b0a9f8f7b9566d933f4" },
-  "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" }
+  "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
+  "vimtex": { "branch": "master", "commit": "f36e5856d85ff97aced152020ac92e3e3a10096b" }
 }

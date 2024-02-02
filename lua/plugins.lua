@@ -29,4 +29,6 @@ require("lazy").setup({
         vim.cmd("colorscheme miasma")
       end,
     },
+
+    {'lervag/vimtex'},
 })
