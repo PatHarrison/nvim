@@ -14,3 +14,6 @@ map("n", "<C-L>", "<C-W>l")
 
 -- netrw
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+
+-- nerd tree
+vim.keymap.set("n", "<leader>t", vim.cmd.NERDTreeToggle)

@@ -1,8 +1,10 @@
 local g = vim.g;
 
 g.vimtex_enabled = 1
-g.vimtex_view_method = 'zathura'  -- Set your preferred PDF viewer
+g.vimtex_view_method = 'SumatraPDF.exe'
+g.vimtex_view_general_viewer = "SumatraPDF.exe"
 g.vimtex_view_general_options = '-reuse-instance'
+g.TexBibtexFlavor = 'biber'
 g.vimtex_compiler_latexmk = {
   executable = 'latexmk',
   options = {'-pdf', '-synctex=1', '-interaction=nonstopmode'},
