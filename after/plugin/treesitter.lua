@@ -6,8 +6,9 @@ require("lazy").setup({{
 
         configs.setup({
         --ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
-        ensure_installed = {"python", "lua", "tex", "vim", 
-                            "sql", "html", "javascript", "query"
+        ensure_installed = {
+                "python", "lua", "vim", "sql", 
+                "html", "javascript", "query"
                             },
         sync_install = true,
         highlight = { enable = true },
