@@ -10,149 +10,67 @@ require("lazy").setup({
         config = true,
     },
 	{
-	'nvim-telescope/telescope.nvim', tag = '0.1.5',
-        dependencies = { 'nvim-lua/plenary.nvim' }
+	"nvim-telescope/telescope.nvim", tag = "0.1.5",
+        dependencies = { "nvim-lua/plenary.nvim" }
 	},
 
-    {'preservim/nerdtree'},
+    {"preservim/nerdtree"},
 
-	{'tpope/vim-fugitive'},
-    {'tpope/vim-rhubarb'},
+	{"tpope/vim-fugitive"},
+    {"tpope/vim-rhubarb"},
 
-	{'vim-airline/vim-airline'},
-	{'vim-airline/vim-airline-themes',
-        config = function()
-            vim.cmd(":AirlineTheme minimalist")
-        end
-    },
-
-    {"L3MON4D3/LuaSnip", 
-        event = "VeryLazy",
-        config = function()
-            require("luasnip.loaders.from_lua").load({paths = "./snippets"})
-        end
-    },
+	{"vim-airline/vim-airline"},
+	{"vim-airline/vim-airline-themes"},
 
     {"nvim-treesitter/nvim-treesitter",
         version = false,
         build = function()
             require("nvim-treesitter.install").update({ with_sync = true })
         end,
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = { 
-                    "c", "lua", "vim", "vimdoc", "query", 
-                    "python", "sql", "tex", "rust"
-                },
-                auto_install = false,
-                highlight = { 
-                    enable = true,
-                    additional_vim_regex_highlighting = false
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "<C-n>",
-                        node_incremental = "<C-n>",
-                        scope_incremental = "<C-s>",
-                        node_decremental = "<C-m>",
-                    }
-                }
-            })
-        end
     },
 
-    {'lervag/vimtex',
+    {"lervag/vimtex",
         config = function()
           -- VimTeX basic setup
-          vim.g.vimtex_view_method = 'sumatrapdf.exe'  -- Set SumatraPDF as the viewer
-          vim.g.vimtex_view_general_viewer = 'SumatraPDF'
-          vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
-          vim.g.vimtex_compiler_method = 'latexmk'
+          vim.g.vimtex_view_method = "sumatrapdf.exe"  -- Set SumatraPDF as the viewer
+          vim.g.vimtex_view_general_viewer = "SumatraPDF"
+          vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
+          vim.g.vimtex_compiler_method = "latexmk"
         end
     },
 
-    {'zchee/deoplete-jedi'},
+    {"zchee/deoplete-jedi"},
 
-    { "hrsh7th/nvim-cmp",
+    {"VonHeikemen/lsp-zero.nvim",
         dependencies = {
-            "hrsh7th/cmp-nvim-lsp",
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip"
-        },
-        config = function()
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
-
-            local cmp = require('cmp')
-            local luasnip = require('luasnip')
-
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end
-                },
-                completion = {
-                    autocomplete = false
-                },
-                mapping = cmp.mapping.preset.insert ({
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                        end, { "i", "s" }
-                    ),
-                    ["<s-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                        end, { "i", "s" }
-                    ),
-                    ["<c-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({ select=true }),
-                }),
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                }
-            })
-        end
-    },
-
-    {"neovim/nvim-lspconfig",
-        dependencies = {
+            "neovim/nvim-lspconfig",
             "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim"
-        },
-        config = function()
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+            "williamboman/mason-lspconfig.nvim",
 
-            require('mason').setup()
-            local mason_lspconfig = require 'mason-lspconfig'
-            mason_lspconfig.setup {
-                ensure_installed = { "pyright", "texlab" }
-            }
-            require("lspconfig").pyright.setup {
-                capabilities = capabilities,
-            }
-        end
+            -- Autocompletion
+            "hrsh7th/nvim-cmp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "saadparwaiz1/cmp_luasnip",
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+
+            -- Snippets
+            "L3MON4D3/LuaSnip",
+            "rafamadriz/friendly-snippets",
+        }
     },
 
+    {"ray-x/lsp_signature.nvim", -- Signature help
+        event = "VeryLazy",
+        opts = {bind=true,
+                doc_lines=0,
+                handler_opts = {
+                    border = "none"
+                }
+        },
+        config = function(_, opts) require'lsp_signature'.setup(opts) end
+    },
     -- {
     --   "PatHarrison/miasma.nvim",
     --   lazy = false,

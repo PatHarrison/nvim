@@ -1,24 +1,22 @@
-require("lazy").setup({{
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function () 
-        local configs = require("nvim-treesitter.configs")
-
-        configs.setup({
-        --ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
-        ensure_installed = {
-                "python", "lua", "vim", "sql", 
-                "html", "javascript", "query"
-                            },
-        sync_install = true,
-        highlight = { enable = true },
-        indent = { enable = true },  
-        additional_vim_regex_highlighting = true,
-
-        custom_captures = {
-            ["self"] = "Type",
+require("nvim-treesitter.configs").setup({
+    ensure_installed = {
+        "c", "lua", "vim", "vimdoc", "query",
+        "python", "sql", "rust"
+    },
+    auto_install = false,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "<C-n>",
+            node_incremental = "<C-n>",
+            scope_incremental = "<C-s>",
+            node_decremental = "<C-m>",
         }
-        })
-    end
- }})
+    }
+})
+
 
