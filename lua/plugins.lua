@@ -22,7 +22,7 @@ require("lazy").setup({
 	{'vim-airline/vim-airline'},
 	{'vim-airline/vim-airline-themes',
         config = function()
-            vim.cmd("AirlineTheme minimalist")
+            vim.cmd(":AirlineTheme minimalist")
         end
     },
 
