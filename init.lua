@@ -5,5 +5,7 @@ require("lazy_bootstrap") -- must be required before plugins list
 require("plugins")
 
 vim.g.python3_host_prog = 'C:\\Program Files\\Python312\\python.exe'
-vim.cmd(":AirlineTheme base16")
+vim.g.python_host_prog = 'C:\\Program Files\\Python312\\python.exe'
+
+vim.cmd(":AirlineTheme minimalist")
 

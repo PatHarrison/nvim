@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- These are example language servers. 
 require('lspconfig').gleam.setup({})
 require('lspconfig').ocamllsp.setup({})
+require('lspconfig').pyright.setup{}
 
 local cmp = require('cmp')
 

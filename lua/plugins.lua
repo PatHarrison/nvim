@@ -39,7 +39,17 @@ require("lazy").setup({
         end
     },
 
-    {"zchee/deoplete-jedi"},
+    -- {"zchee/deoplete-jedi"},
+    -- {"Shougo/deoplete.nvim"},
+    {"Shougo/deoplete.nvim",
+        buid = ":UpdateRemotePlugins",
+        config = function()
+            vim.g["deoplete#enable_at_startup"] = 1
+        end,
+    },
+    {"zchee/deoplete-jedi",
+        ft = { "python" },
+    },
 
     {"VonHeikemen/lsp-zero.nvim",
         dependencies = {
@@ -63,9 +73,7 @@ require("lazy").setup({
 
     {"ray-x/lsp_signature.nvim", -- Signature help
         event = "VeryLazy",
-        opts = {bind=true,
-                doc_lines=0,
-                handler_opts = {
+        opts = {bind=true, doc_lines=0, handler_opts = {
                     border = "none"
                 }
         },
