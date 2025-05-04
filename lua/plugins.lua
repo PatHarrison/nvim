@@ -20,10 +20,14 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     -- Lazy handles itself
-    { "folke/lazy.nvim", version = "*" },
+    {"folke/lazy.nvim", version = "*" },
 
-    {
-        "nvim-telescope/telescope.nvim",
+    {"vhyrro/luarocks.nvim",
+        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config
+        config = true,
+    },
+
+    {"nvim-telescope/telescope.nvim",
         tag = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim" },
         cmd = "Telescope"
@@ -31,27 +35,22 @@ require("lazy").setup({
 
     {"preservim/nerdtree"},
 
-    {
-        "nvim-treesitter/nvim-treesitter",
+    {"nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile" }
     },
-    {
-        "nvim-treesitter/playground",
+    {"nvim-treesitter/playground",
         cmd = "TSPlaygroundToggle"
     },
 
-    {
-        "tpope/vim-fugitive",
+    {"tpope/vim-fugitive",
         cmd = { "Git", "G" }
     },
-    {
-        "tpope/vim-rhubarb",
+    {"tpope/vim-rhubarb",
         event = "VeryLazy"
     },
 
-    {
-        "lervag/vimtex",
+    {"lervag/vimtex",
         config = function()
           vim.g.vimtex_view_method = "sumatrapdf.exe"  -- Set SumatraPDF as the viewer
           vim.g.vimtex_view_general_viewer = "SumatraPDF"
@@ -80,8 +79,7 @@ require("lazy").setup({
             "rafamadriz/friendly-snippets",
         }
     },
-    {
-        "ray-x/lsp_signature.nvim",
+    {"ray-x/lsp_signature.nvim",
         event = "InsertEnter",
         opts = {
             bind=true, doc_lines=0,
@@ -91,21 +89,12 @@ require("lazy").setup({
         },
         config = function(_ ,opts) require("lsp_signature").setup(opts) end
     },
-    {
-        "Shougo/deoplete.nvim",
-        buid = ":UpdateRemotePlugins",
-        config = function()
-            vim.g["deoplete#enable_at_startup"] = 1
-        end,
-    },
-    {
-        "zchee/deoplete-jedi",
-        ft = { "python" },
-    },
-
-
 	{"vim-airline/vim-airline"},
-	{"vim-airline/vim-airline-themes"},
+	{"vim-airline/vim-airline-themes",
+        config = function()
+            vim.cmd([[let g:airline_theme = 'minimalist']])
+        end
+    },
 
     {
         "PatHarrison/mistwood.nvim",
