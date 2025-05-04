@@ -1,3 +1,6 @@
+-- [[ after/plugin/lsp.lua ]]
+
+
 require("mason").setup({})
 require("mason-lspconfig").setup({
     ensure_installed = { "lua_ls", "rust_analyzer", "pyright" },
@@ -12,7 +15,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     desc = "LSP actions",
     callback = function(event)
         local bufnr = event.buf
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
         local opts = { buffer = bufnr }
 
         vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
