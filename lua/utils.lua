@@ -1,13 +1,9 @@
--- [[ utils.lua ]]
+-- [[ lua/utils.lua ]]
 
 local M = {}
 
-function M.map(mode, lhs, rhs, opts)
-	local options = {noremap = true}
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+function M.map(mode, lhs, rhs)
+	vim.keymap.set(mode, lhs, rhs)
 end
 
 return M

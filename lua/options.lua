@@ -1,44 +1,46 @@
--- [[ options]]
+-- [[ lua/options ]]
+
 local opt = vim.opt
 local g = vim.g
 
--- [[ Context ]]
+opt.number = true
+opt.relativenumber = true
+
+opt.colorcolumn = "79"
+opt.scrolloff = 4
+opt.signcolumn = "yes"
+
 opt.wrap = false
-opt.colorcolumn = '79'		     -- str:  Show col for max line length
-opt.number = true                -- bool: Show line numbers
-opt.relativenumber = true        -- bool: Show relative line numbers
-opt.scrolloff = 4                -- int:  Min num lines of context
-opt.signcolumn = "yes"           -- str:  Show the sign column
 
--- [[ Filetypes ]]
-opt.encoding = 'utf8'            -- str:  String encoding to use
-opt.fileencoding = 'utf8'        -- str:  File encoding to use
 
--- [[ Theme ]]
-opt.syntax = "ON"                -- str:  Allow syntax highlighting
-opt.termguicolors = true         -- bool: If term supports ui color then enable
-vim.g.airline_theme="atomic"
+opt.encoding = "utf8"
+opt.fileencoding = "utf8"
 
--- [[ Search ]]
-opt.ignorecase = true            -- bool: Ignore case in search patterns
-opt.smartcase = true             -- bool: Override ignorecase if search contains capitals
-opt.incsearch = true             -- bool: Use incremental search
-opt.hlsearch = false             -- bool: Highlight search matches
+opt.syntax = "ON"
+opt.termguicolors = true
 
--- [[ Whitespace ]]
-opt.expandtab = true             -- bool: Use spaces instead of tabs
-opt.shiftwidth = 4               -- num:  Size of an indent
-opt.softtabstop = 4              -- num:  Number of spaces tabs count for in insert mode
-opt.tabstop = 4                  -- num:  Number of spaces tabs count for
 
--- [[ Splits ]]
-opt.splitright = true            -- bool: Place new window to right of current one
-opt.splitbelow = true            -- bool: Place new window below the current one
+opt.ignorecase = true
+opt.smartcase = true
+opt.incsearch = true 
+opt.hlsearch = false
 
--- [[ Misc ]]
+
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.softtabstop = 4
+opt.tabstop = 4
+
+
+opt.splitright = true
+opt.splitbelow = true
+
+
 opt.mouse = 'a'
 opt.completeopt = "menuone,noselect"
 opt.foldmethod = 'indent'
 opt.foldlevel = 99
+
+
 
 

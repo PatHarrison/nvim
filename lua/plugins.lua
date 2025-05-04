@@ -1,37 +1,58 @@
--- [[ plugins.lua ]]
+-- [[ lua/plugins.lua ]]
 
--- bootstrap lazy.nvim
-require("lazy_bootstrap")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
--- 
+
 require("lazy").setup({
-    {"vhyrro/luarocks.nvim",
-        priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-        config = true,
+    -- Lazy handles itself
+    { "folke/lazy.nvim", version = "*" },
+
+    {
+        "nvim-telescope/telescope.nvim",
+        tag = "0.1.8",
+        dependencies = { "nvim-lua/plenary.nvim" },
+        cmd = "Telescope"
     },
-	{
-	"nvim-telescope/telescope.nvim", tag = "0.1.5",
-        dependencies = { "nvim-lua/plenary.nvim" }
-	},
 
     {"preservim/nerdtree"},
 
-	{"tpope/vim-fugitive"},
-    {"tpope/vim-rhubarb"},
-
-	{"vim-airline/vim-airline"},
-	{"vim-airline/vim-airline-themes"},
-
-    {"nvim-treesitter/nvim-treesitter",
-        version = false,
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = true })
-        end,
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        event = { "BufReadPost", "BufNewFile" }
+    },
+    {
+        "nvim-treesitter/playground",
+        cmd = "TSPlaygroundToggle"
     },
 
-    {"lervag/vimtex",
+    {
+        "tpope/vim-fugitive",
+        cmd = { "Git", "G" }
+    },
+    {
+        "tpope/vim-rhubarb",
+        event = "VeryLazy"
+    },
+
+    {
+        "lervag/vimtex",
         config = function()
-          -- VimTeX basic setup
           vim.g.vimtex_view_method = "sumatrapdf.exe"  -- Set SumatraPDF as the viewer
           vim.g.vimtex_view_general_viewer = "SumatraPDF"
           vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
@@ -39,19 +60,8 @@ require("lazy").setup({
         end
     },
 
-    -- {"zchee/deoplete-jedi"},
-    -- {"Shougo/deoplete.nvim"},
-    {"Shougo/deoplete.nvim",
-        buid = ":UpdateRemotePlugins",
-        config = function()
-            vim.g["deoplete#enable_at_startup"] = 1
-        end,
-    },
-    {"zchee/deoplete-jedi",
-        ft = { "python" },
-    },
-
-    {"VonHeikemen/lsp-zero.nvim",
+    {
+        "VonHeikemen/lsp-zero.nvim",
         dependencies = {
             "neovim/nvim-lspconfig",
             "williamboman/mason.nvim",
@@ -70,27 +80,40 @@ require("lazy").setup({
             "rafamadriz/friendly-snippets",
         }
     },
-
-    {"ray-x/lsp_signature.nvim", -- Signature help
-        event = "VeryLazy",
-        opts = {bind=true, doc_lines=0, handler_opts = {
-                    border = "none"
-                }
+    {
+        "ray-x/lsp_signature.nvim",
+        event = "InsertEnter",
+        opts = {
+            bind=true, doc_lines=0,
+            handler_opts = {
+                border = "none"
+            }
         },
-        config = function(_, opts) require'lsp_signature'.setup(opts) end
+        config = function(_ ,opts) require("lsp_signature").setup(opts) end
     },
-    -- {
-    --   "PatHarrison/miasma.nvim",
-    --   lazy = false,
-    --   config = function()
-    --     vim.cmd("colorscheme miasma")
-    --   end,
-    -- },
-
-    {"PatHarrison/mistwood.nvim",
-        lazy = false,
+    {
+        "Shougo/deoplete.nvim",
+        buid = ":UpdateRemotePlugins",
         config = function()
-            vim.cmd("colorscheme mistwood")
+            vim.g["deoplete#enable_at_startup"] = 1
         end,
     },
+    {
+        "zchee/deoplete-jedi",
+        ft = { "python" },
+    },
+
+
+	{"vim-airline/vim-airline"},
+	{"vim-airline/vim-airline-themes"},
+
+    {
+        "PatHarrison/mistwood.nvim",
+        name = "mistwood",
+        lazy = false,
+        priority = 1000,
+        config = function()
+          vim.cmd("colorscheme mistwood")
+        end
+    }
 })

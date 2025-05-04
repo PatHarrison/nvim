@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "ci": "^2.3.0",
-    "coc.nvim": "^0.0.83-next.9"
-  }
-}

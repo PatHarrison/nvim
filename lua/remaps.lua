@@ -1,4 +1,4 @@
--- [[ remaps.lua ]]
+-- [[ lua/remaps.lua ]]
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -13,7 +13,7 @@ map("n", "<C-H>", "<C-W>h")
 map("n", "<C-L>", "<C-W>l")
 
 -- netrw
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+map("n", "<leader>e", ":Ex<return>")
 
--- nerd tree
-vim.keymap.set("n", "<leader>t", vim.cmd.NERDTreeToggle)
+-- nerdtree
+map("n", "<leader>t", ":NERDTreeToggle<return>")
