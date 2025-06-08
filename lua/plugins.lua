@@ -52,10 +52,18 @@ require("lazy").setup({
 
     {"lervag/vimtex",
         config = function()
-          vim.g.vimtex_view_method = "sumatrapdf.exe"  -- Set SumatraPDF as the viewer
-          vim.g.vimtex_view_general_viewer = "SumatraPDF"
-          vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
-          vim.g.vimtex_compiler_method = "latexmk"
+            -- Enable continuous compilation
+            vim.g.vimtex_compiler_latexmk = {
+                continuous = 1,
+            }
+
+            -- Automatically open PDF viewer after first compilation
+            vim.g.vimtex_view_automatic = 1
+
+            -- SumatraPDF configuration
+            vim.g.vimtex_view_method = "general"
+            vim.g.vimtex_view_general_viewer = "SumatraPDF.exe"
+            vim.g.vimtex_view_general_options = "-reuse-instance -forward-search @tex @line @pdf"
         end
     },
 
